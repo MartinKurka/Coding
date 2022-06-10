@@ -12,30 +12,31 @@ const char* ssid = "SPARTA";  // Enter SSID here
 const char* password = "9306111078";  //Enter Password here
 
 ESP8266WebServer server(80);
+IPAddress ip(192,168,0,20); 
+IPAddress gateway(192,168,0,1); 
+IPAddress subnet(255,255,255,0); 
 
 // DHT Sensor
 uint8_t DHTPin = 2; 
-               
-// Initialize DHT sensor.
-DHT dht(DHTPin, DHTTYPE);                
-
+DHT dht(DHTPin, DHTTYPE);
 float Temperature;
 float Humidity;
  
 void setup() {
   Serial.begin(115200);
-  delay(100);
-  
+  delay(100);  
   pinMode(DHTPin, INPUT);
-
   dht.begin();              
 
   Serial.println("Connecting to ");
   Serial.println(ssid);
 
   //connect to your local wi-fi network
+  //WiFi.begin(ssid, password);
+  WiFi.config(ip,gateway,subnet);
+  WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
-
+  
   //check wi-fi is connected to wi-fi network
   while (WiFi.status() != WL_CONNECTED) {
   delay(1000);
@@ -43,7 +44,8 @@ void setup() {
   }
   Serial.println("");
   Serial.println("WiFi connected..!");
-  Serial.print("Got IP: ");  Serial.println(WiFi.localIP());
+  Serial.print("Got IP: ");  
+  Serial.println(WiFi.localIP());
 
   server.on("/", handle_OnConnect);
   server.onNotFound(handle_NotFound);
