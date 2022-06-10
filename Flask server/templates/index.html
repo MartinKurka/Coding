@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<title>{{ title }}</title>
+    <h1 style="color:black;font-size:60px;">Meteostanice</h1>
+    <a href = {{url_for('milovice')}} style="color:blue;font-size:50px;">Milovice</a>
+<br>
+    <a href = {{url_for('hrazany')}} style="color:blue;font-size:50px;">Hrazany</a>
+<br>
+    <a href = {{url_for('praha')}} style="color:blue;font-size:50px;">Praha 6 - Na Dlouhém lánu</a>
+<br>
+<br>
+<br>
+    <hr style="height:2px;border-width:0;color:gray;background-color:green">
+    <p>
+    <h2 style="color:green;font-size:40px;">Cena bitcoinu</h2>
+    {{ bitcoin[0] }}
+    <h3 style="color:green;font-size:30px;">{{ bitcoin[1] }} USD | {{ bitcoin[2] }} CZK</h3>
+    </p>
+    <img src="{{ img }}"/>
+</html>

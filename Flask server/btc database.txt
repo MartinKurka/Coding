@@ -1,0 +1,4 @@
+CREATE TABLE bitcoin(id INTEGER PRIMARY KEY AUTOINCREMENT, date DATETIME, price REAL);
+INSERT INTO bitcoin (date, price) VALUES (datetime('now','localtime'), 30125.265);
+
+c.execute('INSERT INTO marketTypes (id, name, href) VALUES (?, ?, ?)', (data['id_str'], data['type']['name'], data['type']['href']))
