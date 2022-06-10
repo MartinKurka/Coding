@@ -1,0 +1,11 @@
+nohup python3.8 run.py > console.log &
+pkill -f run.py
+
+ps ax | grep run.py
+
+nohup python3 req.py > console.log &
+
+
+nohup python3.5 save_bitcoin_to_db.py > bitcoin db.log &
+ps ax | grep save_bitcoin_to_db.py
+pkill -f save_bitcoin_to_db.py
