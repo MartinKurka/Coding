@@ -12,9 +12,10 @@ icons_id = {
 
 def api_req(coordinations):
 	# coordinations = {"lat": 50.22622179742758, "lon": 14.870976579184042}
+	# e.g. a5cf6fe06555bdad19e9aedb13d8e5a8
 	lat = coordinations["lat"]
 	lon = coordinations["lon"]
-	api_key = 'a5cf6fe06555bdad19e9aedb13d8e5a8'
+	api_key = 'Token'
 	api_current = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&units=metric&appid={api_key}'
 	api_forecast = f'https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude=daily&units=metric&appid={api_key}'
 

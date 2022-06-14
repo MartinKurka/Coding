@@ -8,8 +8,8 @@
 //#define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
 
 /*Put your SSID & Password*/
-const char* ssid = "SPARTA";  // Enter SSID here
-const char* password = "9306111078";  //Enter Password here
+const char* ssid = "";  // Enter SSID here
+const char* password = "";  //Enter Password here
 
 ESP8266WebServer server(80);
 IPAddress ip(192,168,0,20); 
