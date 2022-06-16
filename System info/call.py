@@ -7,7 +7,10 @@ def main():
         if name == "info":
             # os.system('cd C:\\users\\martin.kurka\\Documents\\githu\\Coding\\System info')
             # os.system('informations.py')
-            output = sp.getoutput('python3.8 informations.py')
+
+            # output = sp.getoutput('python3.8 informations.py')
+            # sp.run('cd C:\\users\\martin.kurka\\Documents\\githu\\Coding\\System info')
+            output = sp.getoutput('informations.py')
             print(output)
 
 if __name__ == "__main__":
