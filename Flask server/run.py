@@ -2,7 +2,7 @@ from bitcoin import CurrentBtcPrice
 from request_btc import get_btc_current_price
 from web import main
 from flask import Flask, render_template
-import datetime
+import subprocess as sp
 import os
 
 app = Flask(__name__)
@@ -56,6 +56,18 @@ def praha():
       'json_file': req
    }
    return render_template('praha.html', **templateData)
+
+@app.route('/system_info')
+def system_info():
+   # Linux
+   # output = sp.getoutput('python3.8 informations.py')
+
+   # windows
+   output = sp.getoutput('system_info.py')
+   templateData = {
+      'info': output,
+   }
+   return render_template('system_info.html', **templateData)
 
 
 if __name__ == "__main__":
