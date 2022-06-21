@@ -1,5 +1,6 @@
 from wheather_api import DayInWeek, api_req
 from datetime import datetime
+from Translator.GoogleTranslator import translate_text
 
 forecast = []
 current_day = ''
