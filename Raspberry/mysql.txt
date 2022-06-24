@@ -14,7 +14,7 @@ INSERT INTO pokoj (date, temp, humidity) VALUES (NOW(), 24.1, 37);
 SELECT * from pokoj;
 
 
-connection = mysql.connector.connect(host='194.182.80.42',
+connection = mysql.connector.connect(host='',
                                                 database='teploty',
                                                 user='martin',
                                                 password='hafling')
