@@ -1,0 +1,27 @@
+sudo mysql -u root -p
+
+CREATE DATABASE db_name;
+SHOW tables;
+show databases;
+
+use teploty; # vyber databázi
+
+
+create table pokoj(id INT NOT NULL AUTO_INCREMENT, date DATETIME, temp FLOAT, humidity FLOAT, PRIMARY KEY ( id ));
+
+INSERT INTO pokoj (date, temp, humidity) VALUES (NOW(), 24.1, 37);
+
+SELECT * from pokoj;
+
+
+connection = mysql.connector.connect(host='194.182.80.42',
+                                                database='teploty',
+                                                user='martin',
+                                                password='hafling')
+
+
+nohup python3 mysql_example.py > log_mysql.log &
+
+ps ax | grep mysql_example.py
+
+pkill -f mysql_example.py
