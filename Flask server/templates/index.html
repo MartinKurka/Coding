@@ -9,13 +9,18 @@
 <br>
 <br>
 <br>
-    <hr style="height:2px;border-width:0;color:gray;background-color:green">
-    <p>
-    <h2 style="color:green;font-size:40px;">Cena bitcoinu</h2>
-    {{ bitcoin[0] }}
-    <h3 style="color:green;font-size:30px;">{{ bitcoin[1] }} USD | {{ bitcoin[2] }} CZK</h3>
-    </p>
-    <img src="{{ img }}"/>
+
+<hr style="height:2px;border-width:0;color:gray;background-color:blue">
+<h2 style="color:blue;font-size:40px;">Teplota v pokoji</h2>
+<img src="{{ img_teploty_pokoj }}"/>
+
+<hr style="height:2px;border-width:0;color:gray;background-color:green">
+<p>
+<h2 style="color:green;font-size:40px;">Cena bitcoinu</h2>
+{{ bitcoin[0] }}
+<h3 style="color:green;font-size:30px;">{{ bitcoin[1] }} USD | {{ bitcoin[2] }} CZK</h3>
+</p>
+<img src="{{ img_btc }}"/>
 
 <hr style="height:2px;border-width:0;color:gray;background-color:green">
 <a href = {{url_for('system_info')}} style="color:blue;font-size:10px;">System info</a>

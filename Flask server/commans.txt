@@ -6,6 +6,10 @@ ps ax | grep run.py
 nohup python3 req.py > console.log &
 
 
-nohup python3.5 save_bitcoin_to_db.py > bitcoin db.log &
+nohup python3.5 save_bitcoin_to_db.py > bitcoin_db.log &
 ps ax | grep save_bitcoin_to_db.py
 pkill -f save_bitcoin_to_db.py
+
+nohup python3.8 read_room_temp_and_humidity.py > read_room_temp.log &
+ps ax | grep read_room_temp_and_humidity.py
+pkill -f read_room_temp_and_humidity.py
