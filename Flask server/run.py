@@ -2,6 +2,7 @@ from bitcoin import CurrentBtcPrice
 from request_btc import get_btc_current_price
 from web import main
 from flask import Flask, render_template
+from read_room_temp_and_humidity import read_room_temps
 import subprocess as sp
 import os
 
@@ -13,9 +14,11 @@ app.config['UPLOAD_FOLDER'] = imagefolder
 
 @app.route("/")
 def hello():
+   read_room_temps()
    date, price_usd, price_czk = get_btc_current_price()
    templateData = {
-      'img': os.path.join(app.config['UPLOAD_FOLDER'], 'btc_export.png'),
+      'img_btc': os.path.join(app.config['UPLOAD_FOLDER'], 'btc_export.png'),
+      'img_teploty_pokoj': os.path.join(app.config['UPLOAD_FOLDER'], 'teplota_pokoj.png'),
       'title' : 'Meteostanice',
       'bitcoin': [date, int(price_usd), int(price_czk)],
       }
