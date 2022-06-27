@@ -12,6 +12,22 @@ def main(coordinations, city):
     send_html.encode('utf-8')
     return send_html
 
+def bot_send_forecast():
+    result = ""
+    city = "Milovice"
+    coordinations = {"lat": 50.22622179742758, "lon": 14.870976579184042}
+    forecast = api_req(coordinations)
+    result += city + '\n'
+
+    result += "Teplota: " + str(forecast["current"]["temp"])+ '\n'
+    result += "Vlhkost: " + str(forecast["current"]["humidity"])+ '\n'
+    result += "Tlak: " + str(forecast["current"]["pressure"])+ '\n'
+    result += "Vítr, rychlost: " + str(forecast["current"]["wind_speed"])+ '\n'
+    result += "Vítr, směr: " + str(forecast["current"]["wind_deg"])+ '\n'
+    result += "Mraky: " + str(forecast["current"]["clouds"])+ '\n'
+    result += str(forecast["current"]["weather"][0]["main"]) + " - " + str(forecast["current"]["weather"][0]["description"]) + '\n'
+    return result
+
 
 def update(city):
     global current_day
