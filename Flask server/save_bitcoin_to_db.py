@@ -1,10 +1,11 @@
 import sqlite3
 from bitcoin import CurrentBtcPrice
 from read_bitcoin_db import read_btc
+from telegram_bot.bot_message import send_me_message
 import time
 
 # Check time in minutes
-check_time = 5
+check_time = 20
 
 def main():
     while True:
@@ -20,6 +21,7 @@ def main():
             time.sleep(check_time * 60)
         except:
             print("Failed script")
+            send_me_message("save_bitcoin_to_db.py failed")
 
     # conn = sqlite3.connect('bitcoin_database.db')
     # cursor = conn.cursor()
