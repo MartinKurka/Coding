@@ -28,11 +28,11 @@ def get_room_temp():
                 # print(all_data[all_data.index(item) - 1])
                 if float(all_data[all_data.index(item) + 1]) >= 0 and float(all_data[all_data.index(item) + 1]) <= 100:
                     humidity = float(all_data[all_data.index(item) + 1])
-        date = datetime.now().strftime("%d/%m/%Y %H:%M")
+        # date = datetime.now().strftime("%d/%m/%Y %H:%M")
         # print(date)
         # print(price_usd, price_czk)
         all_data = []
-        return str(date), temp, humidity
+        return temp, humidity
     except:
         pass
 
