@@ -2,6 +2,7 @@ import mysql.connector
 from mysql.connector import Error
 from req import get_room_temp
 from datetime import datetime
+from telegram_bot.bot_message import send_me_message
 import time
 
 # read time in minutes
@@ -20,13 +21,18 @@ def main():
                                                 password='hafling')
            if connection.is_connected():
                db_Info = connection.get_server_info()
-               date, temp, humidity = get_room_temp()
+               temp, humidity = get_room_temp()
                # print(date, temp, humidity)
                cursor = connection.cursor()
                cursor.execute(f"INSERT INTO pokoj (date, temp, humidity) VALUES (NOW(), {temp}, {humidity});")
                connection.commit()
         except Error as e:
            print(datetime.now()," --  Error while connecting to MySQL", e)
+           try:
+               send_me_message("Raspberry mysql_example.py failed")
+           except:
+               pass
+           pass
         finally:
            if connection.is_connected():
                # cursor = connection.cursor()
