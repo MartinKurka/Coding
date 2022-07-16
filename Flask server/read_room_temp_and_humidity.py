@@ -6,10 +6,10 @@ def read_room_temps():
     x_timeline = []
     y_temp = []
     y_humidity = []
-    connection = mysql.connector.connect(host='194.182.80.42',
-                                         database='teploty',
-                                         user='martin',
-                                         password='hafling')
+    connection = mysql.connector.connect(host='',
+                                         database='',
+                                         user='',
+                                         password='')
     cursor = connection.cursor()
     cursor.execute("SELECT * FROM pokoj ORDER BY date DESC LIMIT 200")
     rows = cursor.fetchall()
