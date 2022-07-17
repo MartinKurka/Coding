@@ -7,9 +7,16 @@
 //#define DHTTYPE DHT21   // DHT 21 (AM2301)
 //#define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
 
+// Dallas DS18b20
+#include <DallasTemperature.h>
+#include <OneWire.h>
+#define ONE_WIRE_BUS 5
+OneWire oneWire(ONE_WIRE_BUS); 
+DallasTemperature sensors(&oneWire);            // Pass the oneWire reference to Dallas Temperature.
+
 /*Put your SSID & Password*/
-const char* ssid = "";  // Enter SSID here
-const char* password = "";  //Enter Password here
+const char* ssid = "SPARTA";  // Enter SSID here
+const char* password = "9306111078";  //Enter Password here
 
 ESP8266WebServer server(80);
 IPAddress ip(192,168,0,20); 
@@ -53,6 +60,12 @@ void setup() {
   server.begin();
   Serial.println("HTTP server started");
 
+  sensors.begin();
+//  sensors.setResolution(0, 11);                 // adresa senzoru a kolik bit přesnost (9 - 12)
+//  sensors.requestTemperatures();                // Send the command to get temperatures  
+//  Serial.println("Temperature is: ");
+//  Serial.println(sensors.getTempCByIndex(0));   // Why "byIndex"? You can have more than one IC on the same bus. 0 refers to the first IC on the wire
+
 }
 void loop() {
   
@@ -60,9 +73,19 @@ void loop() {
   
 }
 
+float dallas_temp() {
+  float temp = 0;
+  sensors.requestTemperatures();                // Send the command to get temperatures  
+//  Serial.println("Temperature is: ");
+//  Serial.println(sensors.getTempCByIndex(0));   // Why "byIndex"? You can have more than one IC on the same bus. 0 refers to the first IC on the wire
+  temp = sensors.getTempCByIndex(0);
+  return temp;
+}
+
 void handle_OnConnect() {
 
- Temperature = dht.readTemperature(); // Gets the values of the temperature
+  Temperature = dallas_temp(); // Gets the values of the temperature
+//  Temperature = dht.readTemperature(); // Gets the values of the temperature
   Humidity = dht.readHumidity(); // Gets the values of the humidity 
   server.send(200, "text/html", SendHTML(Temperature,Humidity)); 
 }
@@ -86,7 +109,7 @@ String SendHTML(float Temperaturestat,float Humiditystat){
   
   ptr +="<p>Temperature</p>";
   ptr +="<p>";
-  ptr +=(int)Temperaturestat;
+  ptr +=(float)Temperaturestat;
   ptr +="</p>";
   ptr +="<p>Humidity";
   ptr +="<p>";
