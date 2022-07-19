@@ -6,10 +6,10 @@ def read_room_temps():
     x_timeline = []
     y_temp = []
     y_humidity = []
-    connection = mysql.connector.connect(host='',
-                                         database='',
-                                         user='',
-                                         password='')
+    connection = mysql.connector.connect(host='194.182.80.42',
+                                         database='teploty',
+                                         user='martin',
+                                         password='hafling')
     cursor = connection.cursor()
     cursor.execute("SELECT * FROM pokoj ORDER BY date DESC LIMIT 200")
     rows = cursor.fetchall()
@@ -23,28 +23,28 @@ def read_room_temps():
     y_temp = y_temp[::-1]
     y_humidity = y_humidity[::-1]
 
-    # print(x_timeline)
-    fig, ax1 = plt.subplots()
-    fig.set_size_inches(12, 5, forward=True)
-    color = 'tab:red'
-    ax1.set_xticks(np.arange(1, len(x_timeline), 15))
-    plt.xticks(rotation=45)
-    plt.subplots_adjust(bottom=0.30, left=0.07, right=0.970)
-    ax1.set_ylabel('Teplota [°C]', color=color)
-    ax1.plot(x_timeline, y_temp, color=color)
-    ax1.tick_params(axis='y', labelcolor=color)
+    fig, axs = plt.subplots(2, 1)
+    fig.set_size_inches(12, 10, forward=True)
 
-    ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
+    title = "Aktuálně " + str(x_timeline[len(x_timeline) - 1]) + " |    " + str(
+        y_temp[len(y_temp) - 1]) + " °C   " + str(y_humidity[len(y_humidity) - 1]) + " %"
+    fig.suptitle(title, fontsize=20)
 
-    color = 'tab:blue'
-    ax2.set_xticks(np.arange(1, len(x_timeline), 15))
-    ax2.set_ylabel('Vlhkost [%]', color=color)  # we already handled the x-label with ax1
-    ax2.plot(x_timeline, y_humidity, color=color)
-    ax2.tick_params(axis='y', labelcolor=color)
-    title = "Aktuálně " + str(x_timeline[len(x_timeline) - 1]) + " |    " + str(y_temp[len(y_temp)-1])+ " °C   " + str(y_humidity[len(y_humidity)-1])+ " %"
-    plt.title(title, fontsize = 20)
-    plt.grid()
-    fig.tight_layout()  # otherwise the right y-label is slightly clipped
+    axs[0].plot(x_timeline, y_temp, 'r')
+    axs[0].set_xticks(np.arange(1, len(x_timeline), 15))
+    axs[0].set_ylabel('Teplota [°C]')
+    axs[0].tick_params(axis='x', rotation=45)
+    axs[0].grid(True)
+
+    axs[1].plot(x_timeline, y_humidity, 'b')
+    axs[1].set_xticks(np.arange(1, len(x_timeline), 15))
+    axs[1].set_ylabel('Vlhkost [%]')
+    axs[1].grid(True)
+    axs[1].tick_params(axis='x', rotation=45)
+
+
+    plt.subplots_adjust(hspace=0.415)
+    fig.tight_layout()
     plt.savefig("static/images/teplota_pokoj.png")
     # plt.show()
 
