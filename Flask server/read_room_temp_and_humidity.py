@@ -6,7 +6,7 @@ def read_room_temps():
     x_timeline = []
     y_temp = []
     y_humidity = []
-    connection = mysql.connector.connect(host='194.182.80.42',
+    connection = mysql.connector.connect(host='',
                                          database='teploty',
                                          user='martin',
                                          password='hafling')
