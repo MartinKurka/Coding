@@ -1,4 +1,6 @@
+from Credencials.Credentials import Access
 
+print(Access['FORECAST']['API'])
 def get_azimut(degree):
     if 0 <= degree <= 22.5:
         return "S"

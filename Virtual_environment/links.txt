@@ -1,0 +1,9 @@
+https://arshovon.com/blog/python-background/
+
+source venv/bin/activate
+
+which python
+
+deactivate
+
+python3 -m pip install -r requirements.txt
