@@ -1,10 +1,10 @@
-from bitcoin import CurrentBtcPrice
 from request_btc import get_btc_current_price
 from web import main
 from flask import Flask, render_template
 from read_room_temp_and_humidity import read_room_temps
 import subprocess as sp
 import os
+from threading import Thread
 
 app = Flask(__name__)
 
@@ -14,7 +14,11 @@ app.config['UPLOAD_FOLDER'] = imagefolder
 
 @app.route("/")
 def hello():
-   read_room_temps()
+   t1 = None
+   t1 = Thread(target=read_room_temps)
+   t1.start()
+   t1.join()
+   # read_room_temps()
    date, price_usd, price_czk = get_btc_current_price()
    templateData = {
       'img_btc': os.path.join(app.config['UPLOAD_FOLDER'], 'btc_export.png'),
